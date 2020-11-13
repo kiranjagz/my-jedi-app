@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StarWarsService } from '../star-wars.service';
+import { ForceCharacter } from './ForceCharacter';
 
 @Component({
   selector: 'app-create-character',
@@ -13,6 +14,7 @@ export class CreateCharacterComponent implements OnInit {
    {display: 'Dark', value: 'dark'}
   ];
   private swService: StarWarsService;
+  forceCharacter: ForceCharacter = new ForceCharacter();
 
   constructor(swService: StarWarsService) {
     this.swService = swService;
@@ -27,6 +29,10 @@ export class CreateCharacterComponent implements OnInit {
     }
 
     console.log(form);
-    this.swService.addCharacter(form.value.name, form.value.side);
+    this.forceCharacter.Name = form.value.name;
+    this.forceCharacter.Side = form.value.side;
+    console.log(this.forceCharacter);
+
+    this.swService.addCharacter(this.forceCharacter);
   }
 }

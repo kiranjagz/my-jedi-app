@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { LogService } from './log.service';
 import { map } from 'rxjs/operators';
 import {Observable} from "rxjs";
+import { ForceCharacter } from './create-character/ForceCharacter';
 
 @Injectable()
 export class StarWarsService{
@@ -59,15 +60,15 @@ export class StarWarsService{
     this.logService.writeLog('Changed side of: ' + charinfo.name + ', new side: ' + charinfo.side);
   }
 
-  addCharacter(name: string, side: string){
+  addCharacter(ForceCharacter: ForceCharacter){
     const pos = this.characters.findIndex((char) => {
-      return char.name === name;
+      return ForceCharacter.Name === name;
     })
     if (pos !== -1){
       return;
     }
 
-    const newChar = { name: name, side: side};
+    const newChar = { name: ForceCharacter.Name, side: ForceCharacter.Side};
     this.characters.push(newChar);
   }
 }
